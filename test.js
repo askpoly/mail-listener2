@@ -8,7 +8,6 @@ var mailListener = new MailListener({
   tls: true,
   tlsOptions: { rejectUnauthorized: false },
   mailbox: 'INBOX',
-  markSeen: true,
   fetchUnreadOnStart: true,
   attachments: true,
   attachmentOptions: { directory: 'attachments/' },

@@ -43,7 +43,6 @@ var mailListener = new MailListener({
   tlsOptions: { rejectUnauthorized: false },
   mailbox: "INBOX", // mailbox to monitor
   searchFilter: ["UNSEEN", "FLAGGED"], // the search filter being used after an IDLE notification has been retrieved
-  markSeen: true, // all fetched email willbe marked as seen and not fetched next time
   fetchUnreadOnStart: true, // use it only if you want to get all unread email on lib start. Default is `false`,
   mailParserOptions: {streamAttachments: true}, // options to be passed to mailParser lib.
   attachments: true, // download attachments as they are encountered to the project directory
@@ -78,7 +77,7 @@ mailListener.on("attachment", function(attachment, email){
 });
 
 // it's possible to access imap object from node-imap library for performing additional actions. E.x.
-mailListener.imap.move(:msguids, :mailboxes, function(){})
+mailListener.imap.move(msguids, mailboxes, function(){})
 
 ```
 

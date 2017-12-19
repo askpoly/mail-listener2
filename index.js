@@ -9,7 +9,6 @@ var async = require('async');
 function MailListener(options) {
   this.haveNewEmails = false;
   this.parsingUnread = false;
-  this.markSeen = !!options.markSeen;
   this.mailbox = options.mailbox || 'INBOX';
   if (typeof options.searchFilter === 'string') {
     this.searchFilter = [options.searchFilter];
@@ -113,7 +112,6 @@ function parseUnread() {
       async.each(results, function (result, callback) {
         var f = self.imap.fetch(result, {
           bodies: '',
-          markSeen: self.markSeen,
         });
         f.on('message', function (msg, seqno) {
           var parser = new MailParser(self.mailParserOptions);
