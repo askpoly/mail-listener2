@@ -1,18 +1,24 @@
 {
-  "name": "mail-listener2-updated",
-  "version": "0.3.2",
+  "name": "mail-listener3",
+  "version": "0.3.3",
   "description": "Updated Mail listener library for node.js. Get notification when new email arrived.",
+  "scripts": {
+    "test": "yarn lint:errors && yarn jest",
+    "test:watch": "yarn jest --watch",
+    "lint": "eslint *.js",
+    "lint:errors": "yarn lint --quiet",
+    "lint:staged": "lint-staged",
+    "lint:fix": "yarn lint --fix",
+    "jest": "TZ='America/New_York' jest",
+    "prepush": "yarn test",
+    "precommit": "yarn lint:staged"
+  },
   "dependencies": {
+    "async": "^0.9.0",
     "imap": "~0.8.14",
     "mailparser": "^0.4.8",
-    "async": "^0.9.0",
     "mime": "^1.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/dapanas/mail-listener2.git"
-  },
-  "homepage": "https://github.com/dapanas/mail-listener2",
   "keywords": [
     "mail",
     "job",
@@ -21,10 +27,11 @@
     "email",
     "email parser"
   ],
-  "author": {
-    "name": "Daniel Pérez",
-    "email": "dapanas@gmail.com",
-    "url": "http://blogcito.info"
-  },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.13.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "jest": "^22.0.1"
+  }
 }
