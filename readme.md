@@ -46,7 +46,11 @@ var mailListener = new MailListener({
   fetchUnreadOnStart: true, // use it only if you want to get all unread email on lib start. Default is `false`,
   mailParserOptions: {streamAttachments: true}, // options to be passed to mailParser lib.
   attachments: true, // download attachments as they are encountered to the project directory
-  attachmentOptions: { directory: "attachments/" } // specify a download directory for attachments
+  attachmentOptions: { directory: "attachments/" }, // specify a download directory for attachments
+  // to make server respond to other requests you may want
+  // to pause for 'fetchingPauseTime' fetching of the email, because it 'hangs' your app
+  fetchingPauseThreshold: null, // amount bytes
+  fetchingPauseTime: 5000 // ms to pause fetching and process other requests
 });
 
 mailListener.start(); // start listening
