@@ -1,8 +1,8 @@
 # Overview
 
-Updated Mail-listener2 library for node.js. Get notification when new email arrived to inbox or when message metadata (e.g. flags) changes externally. Uses IMAP protocol.
+mail-listener-next library for node.js. Get notification when new email arrived to inbox or when message metadata (e.g. flags) changes externally. Uses IMAP protocol.
 
-Updated Mail-listener2 includes changes and improvements from another forks.
+mail-listener-next is based on and includes changes and improvements from forks of [Mail-listener2](c).
 
 The changes are:
 
@@ -15,7 +15,7 @@ The changes are:
 
 We are using these libraries: [node-imap](https://github.com/mscdex/node-imap), [mailparser](https://github.com/andris9/mailparser).
 
-Heavily inspired by [mail-listener](https://github.com/circuithub/mail-listener).
+Heavily inspired by [mail-listener2](https://github.com/chirag04/mail-listener2) & [mail-listener2-updated](https://github.com/dapanas/mail-listener2)
 
 ## Use
 
@@ -29,7 +29,7 @@ JavaScript Code:
 
 ```javascript
 
-var MailListener = require("mail-listener2-updated");
+var MailListener = require("mail-listener-next");
 
 var mailListener = new MailListener({
   username: "imap-username",
