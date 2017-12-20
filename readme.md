@@ -21,7 +21,7 @@ Heavily inspired by [mail-listener2](https://github.com/chirag04/mail-listener2)
 
 Install
 
-`npm install mail-listener2-updated`
+`npm install mail-listener-next`
 
 
 JavaScript Code:
