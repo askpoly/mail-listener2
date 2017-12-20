@@ -26,6 +26,7 @@ function MailListener(options) {
   this.attachmentOptions.directory = this.attachmentOptions.directory
     ? this.attachmentOptions.directory
     : '';
+  this.debug = options.debug || function () {};
   this.fetchingPauseThreshold = options.fetchingPauseThreshold || null;
   this.fetchingPauseTime = options.fetchingPauseTime || 5000;
   this.imap = new Imap({
@@ -57,11 +58,11 @@ MailListener.prototype.stop = function () {
 };
 
 MailListener.prototype.restart = function () {
-  console.log('detaching existing listener');
+  this.debug('detaching existing listener');
   this.imap.removeAllListeners('mail');
   this.imap.removeAllListeners('update');
 
-  console.log('calling imap connect');
+  this.debug('calling imap connect');
   this.imap.connect();
 };
 
@@ -107,7 +108,7 @@ function parseUnread() {
     } else if (results.length > 0) {
       self.imap.setFlags(results, ['\\Seen'], function (err) {
         if (err) {
-          console.log(JSON.stringify(err, null, 2));
+          self.debug(JSON.stringify(err, null, 2));
         }
       });
 
@@ -156,7 +157,7 @@ function parseUnread() {
           msg.on('body', function (stream, info) {
             if (self.fetchingPauseThreshold) {
               collectDataWithPause(
-                stream, emlbuffer, self.fetchingPauseThreshold, self.fetchingPauseTime
+                stream, emlbuffer, self.fetchingPauseThreshold, self.fetchingPauseTime, self.debug
               );
             } else {
               stream.on('data', function (chunk) {
@@ -176,7 +177,7 @@ function parseUnread() {
           self.emit('error', err);
         });
       }, function (err) {
-        console.log('all process');
+        if (self.debug) self.debug('all process');
         if (err) {
           self.emit('error', err);
         }
