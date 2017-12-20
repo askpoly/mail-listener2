@@ -1,7 +1,15 @@
 {
   "name": "mail-listener-next",
-  "version": "0.3.3",
+  "version": "1.0.0",
   "description": "Updated Mail listener library for node.js. Get notification when new email arrived.",
+  "author": {
+    "name" : "uapasha",
+    "email" : "uapasha@gmail.com"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/askpoly/mail-listener2.git"
+  },
   "scripts": {
     "test": "yarn lint:errors && yarn jest",
     "test:watch": "yarn jest --watch",
