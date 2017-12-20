@@ -11,6 +11,7 @@ var mailListener = new MailListener({
   fetchUnreadOnStart: true,
   attachments: true,
   attachmentOptions: { directory: 'attachments/' },
+  fetchingPauseThreshold: 5 * 1048576, // 5 mb
 });
 
 mailListener.start();

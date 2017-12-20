@@ -5,6 +5,7 @@ var MailParser = require('mailparser').MailParser;
 var fs = require('fs');
 var path = require('path');
 var async = require('async');
+var collectDataWithPause = require('./utils').collectDataWithPause;
 
 function MailListener(options) {
   this.haveNewEmails = false;
@@ -25,6 +26,8 @@ function MailListener(options) {
   this.attachmentOptions.directory = this.attachmentOptions.directory
     ? this.attachmentOptions.directory
     : '';
+  this.fetchingPauseThreshold = options.fetchingPauseThreshold || null;
+  this.fetchingPauseTime = options.fetchingPauseTime || 5000;
   this.imap = new Imap({
     xoauth2: options.xoauth2,
     user: options.username,
@@ -151,9 +154,15 @@ function parseUnread() {
             self.emit('attachment', attachment, email);
           });
           msg.on('body', function (stream, info) {
-            stream.on('data', function (chunk) {
-              emlbuffer = Buffer.concat([emlbuffer, chunk]);
-            });
+            if (self.fetchingPauseThreshold) {
+              collectDataWithPause(
+                stream, emlbuffer, self.fetchingPauseThreshold, self.fetchingPauseTime
+              );
+            } else {
+              stream.on('data', function (chunk) {
+                emlbuffer = Buffer.concat([emlbuffer, chunk]);
+              });
+            }
             stream.once('end', function () {
               parser.write(emlbuffer);
               parser.end();
