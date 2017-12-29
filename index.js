@@ -157,7 +157,13 @@ function parseUnread() {
           msg.on('body', function (stream, info) {
             if (self.fetchingPauseThreshold) {
               collectDataWithPause(
-                stream, emlbuffer, self.fetchingPauseThreshold, self.fetchingPauseTime, self.debug
+                stream,
+                self.fetchingPauseThreshold,
+                self.fetchingPauseTime,
+                self.debug,
+                function (chunk) {
+                  emlbuffer = Buffer.concat([emlbuffer, chunk]);
+                }
               );
             } else {
               stream.on('data', function (chunk) {

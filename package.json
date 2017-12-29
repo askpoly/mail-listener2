@@ -1,6 +1,6 @@
 {
   "name": "mail-listener-next",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Updated Mail listener library for node.js. Get notification when new email arrived.",
   "author": {
     "name" : "uapasha",
